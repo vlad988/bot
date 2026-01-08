@@ -2,13 +2,14 @@
 import random
 import logging
 import sqlite3
+import os
 from datetime import datetime, timedelta
 
 from aiogram import Bot, Dispatcher, F
 from aiogram.filters import Command
 from aiogram.types import Message, ReplyKeyboardMarkup, KeyboardButton
 
-API_TOKEN = "8560652013:AAGaG6HR2gFIWm-kFmScaBuGkNfp7JVxILg"
+API_TOKEN = os.getenv("API_TOKEN")
 
 # ----------------- DB -----------------
 conn = sqlite3.connect("bot.db")
