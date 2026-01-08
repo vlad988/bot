@@ -1,11 +1,24 @@
+# Беремо повний Python образ
 FROM python:3.11
 
+# Робоча папка
 WORKDIR /app
 
+# Встановлюємо Rust + build tools
+RUN apt-get update && \
+    apt-get install -y build-essential curl && \
+    curl https://sh.rustup.rs -sSf | sh -s -- -y && \
+    export PATH="$HOME/.cargo/bin:$PATH"
+
+# Копіюємо requirements
 COPY requirements.txt .
+
+# Встановлюємо pip і пакети
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Копіюємо код бота
 COPY . .
 
+# Команда запуску бота
 CMD ["python", "bot.py"]
